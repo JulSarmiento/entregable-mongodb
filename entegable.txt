@@ -1,0 +1,17 @@
+1. En una consola CMD empleamos el siguiente comando para inicializar mongo:  
+  $ mongo
+
+2. Procedemos a revisar las bases de datos disponibles con el comando:
+  $ show databases
+
+3. Procedemos a crear la base de datos "ecommerce"
+  $ use ecommerce
+
+4. Validamos que nos encontremos en la base de datos que acabamos de crear con el comando:
+  $ db 
+
+5. Continuamos creando las colecciones que nos indica la consigna:
+  $ db.createCollection("mensajes")
+  $ db.createCollection("productos")
+
+6. 
