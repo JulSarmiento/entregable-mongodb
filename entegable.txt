@@ -14,4 +14,61 @@
   $ db.createCollection("mensajes")
   $ db.createCollection("productos")
 
-6. 
+6. A continuacion, procedemos a ingresar diez (10) documentos en la coleccion productos:
+  $ db.productos.insertMany([{name: "Collar elegant Glacial", price: 15000, thumbnail: "https://firebasestorage.googleapis.com/v0/b/mazu-store.appspot.com/o/products%2Fcollar-light%2Fcollar-light-amathist-front.jpg?alt=media&token=27a12613-dc33-4ee3-ae18-a1c283a88e38"}, {name: "Collar elegant Esmerald", price: 15000, thumbnail: "https://firebasestorage.googleapis.com/v0/b/mazu-store.appspot.com/o/products%2Fcollar-light%2Fcollar-light-amathist-front.jpg?alt=media&token=27a12613-dc33-4ee3-ae18-a1c283a88e38"},  {name: "Collar elegant Ruby", price: 15000, thumbnail: "https://firebasestorage.googleapis.com/v0/b/mazu-store.appspot.com/o/products%2Fcollar-light%2Fcollar-light-amathist-front.jpg?alt=media&token=27a12613-dc33-4ee3-ae18-a1c283a88e38"},  {name: "Collar elegant Royal Blue", price: 15000, thumbnail: "https://firebasestorage.googleapis.com/v0/b/mazu-store.appspot.com/o/products%2Fcollar-light%2Fcollar-light-amathist-front.jpg?alt=media&token=27a12613-dc33-4ee3-ae18-a1c283a88e38"},  {name: "Collar light Red", price: 12500, thumbnail: "https://firebasestorage.googleapis.com/v0/b/mazu-store.appspot.com/o/products%2Fcollar-light%2Fcollar-light-amathist-front.jpg?alt=media&token=27a12613-dc33-4ee3-ae18-a1c283a88e38"},  {name: "Collar light Black", price: 12500, thumbnail: "https://firebasestorage.googleapis.com/v0/b/mazu-store.appspot.com/o/products%2Fcollar-light%2Fcollar-light-amathist-front.jpg?alt=media&token=27a12613-dc33-4ee3-ae18-a1c283a88e38"},  {name: "Collar light Pink", price: 12500, thumbnail: "https://firebasestorage.googleapis.com/v0/b/mazu-store.appspot.com/o/products%2Fcollar-light%2Fcollar-light-amathist-front.jpg?alt=media&token=27a12613-dc33-4ee3-ae18-a1c283a88e38"},  {name: "Collar light Blue", price: 12500, thumbnail: "https://firebasestorage.googleapis.com/v0/b/mazu-store.appspot.com/o/products%2Fcollar-light%2Fcollar-light-amathist-front.jpg?alt=media&token=27a12613-dc33-4ee3-ae18-a1c283a88e38"},  {name: "Collar light Pink", price: 12500, thumbnail: "https://firebasestorage.googleapis.com/v0/b/mazu-store.appspot.com/o/products%2Fcollar-light%2Fcollar-light-amathist-front.jpg?alt=media&token=27a12613-dc33-4ee3-ae18-a1c283a88e38"},  {name: "Collar elegant Rose Roses", price: 15000, thumbnail: "https://firebasestorage.googleapis.com/v0/b/mazu-store.appspot.com/o/products%2Fcollar-light%2Fcollar-light-amathist-front.jpg?alt=media&token=27a12613-dc33-4ee3-ae18-a1c283a88e38"}])
+
+7. Continuamos agregando diez (10) documentos a la coleccion mensajes:
+  $ db.mensajes.insertMany([{email: "vader@gmail.com", timestamp: new Date(Date.now()), message: "Hola, como estas?" }, {email: "mazu@gmail.com", timestamp: new Date(Date.now()), message: "Hola, como estas?" },{email: "odashi@gmail.com", timestamp: new Date(Date.now()), message: "Hola, como estas?" }, {email: "dio@gmail.com", timestamp: new Date(Date.now()), message: "Hola, como estas?" }, {email: "nest@gmail.com", timestamp: new Date(Date.now()), message: "Hola, como estas?" }, {email: "jest@gmail.com", timestamp: new Date(Date.now()), message: "Hola, como estas?" }, {email: "rest@gmail.com", timestamp: new Date(Date.now()), message: "Hola, como estas?" }, {email: "tyrone@gmail.com", timestamp: new Date(Date.now()), message: "Hola, como estas?" }, {email: "coffee@gmail.com", timestamp: new Date(Date.now()), message: "Hola, como estas?" }])
+
+8. Vamos a listar los documentos presentes en la colecion productos
+  $ db.productos.find().pretty()
+
+9. Vamos a listar los documentos presentes en la coleccion mensajes:
+  $ db.mensajes.find().pretty()
+
+10. Mostrar la cantidad de documentos presentes en la coleccion productos:
+  $ db.productos.count()
+
+11. Mostrar la cantidad de documentos presentes en la coleccion mensajes:
+  $ db.mensajes.count()
+
+12. CRUD con productos:
+
+  12.1. Agregar un producto mas:
+    $ db.productos.insert({name: "Collar elengat Golden Onix", price: 3698, thumbnail: "https://firebasestorage.googleapis.com/v0/b/mazu-store.appspot.com/o/products%2Fcollar-light%2Fcollar-light-amathist-front.jpg?alt=media&token=27a12613-dc33-4ee3-ae18-a1c283a88e38"})
+
+  12.2. Realizar una consulta por nombre de producto especifico:
+
+    12.2.1. Listar los productos con precio menor a 1000
+      $ db.productos.find({price: {$lt: 1000}}).pretty()
+
+    12.2.2. Listar los productos con un precio entre 1000 y 3000 pesos
+      $ db.productos.find({ $and: [ {price: {$gt: 1000}},  {price: {$lt: 3000}} ] })
+    
+    12.2.3. Listar los productos con un precio mayor a 3000 presos:
+      $ db.productos.find({price: {$gt: 3000}})
+  
+  12.3. Hacer una actualizacion sobre todos los productos, agregando el campo stock a todos ellos con un valor de 100 unds.
+    $ db.productos.updateMany({}, {$set: {sotck: 100}})
+
+  12.4. Cambiar el stock a cero tod los productos con precios mayores a 4000 pesos.
+    $ db.productos.updateMany({price: {$gt: 4000}}, {$set: {stock: 0}})
+
+  12.5. Borrar todos los productos con precio menor a 1000 pesos
+    $ db.productos.deleteMany({price: {$lt: 1000}})
+
+13. Crear un usuario 'pepe' con clave: 'asd456' que solo pueda leer la base de datos ecommerce. Verificar que pepe no pueda cambiar la informacion
+
+  13.1. Crear al usuario de solo lectura
+    $ use admin
+
+    $ db.createUser({user: 'pepe', pwd: 'asd456', roles: [{role: "read", db: "ecommerce"}]})
+
+  13.2. Acceso del usuario solo lectura
+    $ mongo -u pepe - p asd456
+
+  13.3. Compramos que podamos leer las colecciones
+    $ db.productos.find().pretty()
+
+  13.4. Compramos que NO podamos agregar documentos a las colecciones
+    $ db.productos.insertOne({name: "Collar elegant Glacial", price: 15000, thumbnail: "https://firebasestorage.googleapis.com/v0/b/mazu-store.appspot.com/o/products%2Fcollar-light%2Fcollar-light-amathist-front.jpg?alt=media&token=27a12613-dc33-4ee3-ae18-a1c283a88e38"})
