@@ -64,11 +64,16 @@
 
     $ db.createUser({user: 'pepe', pwd: 'asd456', roles: [{role: "read", db: "ecommerce"}]})
 
-  13.2. Acceso del usuario solo lectura
-    $ mongo -u pepe - p asd456
+  13.2. Cerramos mongo e iniciamos en modo auth
 
-  13.3. Compramos que podamos leer las colecciones
+    $ mongod --auth
+
+  13.3. Acceso del usuario solo lectura
+    $ mongo -u pepe - p asd456
+    $ use ecommerce  
+
+  13.4. Compramos que podamos leer las colecciones
     $ db.productos.find().pretty()
 
-  13.4. Compramos que NO podamos agregar documentos a las colecciones
+  13.5. Compramos que NO podamos agregar documentos a las colecciones
     $ db.productos.insertOne({name: "Collar elegant Glacial", price: 15000, thumbnail: "https://firebasestorage.googleapis.com/v0/b/mazu-store.appspot.com/o/products%2Fcollar-light%2Fcollar-light-amathist-front.jpg?alt=media&token=27a12613-dc33-4ee3-ae18-a1c283a88e38"})
